@@ -1,7 +1,11 @@
 ## Linear Programming: Application
 
+对于以下的问题，通过 LP 形式表示：
+
 - Shortest Path
 - Max-flow Problem
+- Set Cover
+- Vertex Cover
 
 
 
@@ -85,21 +89,75 @@ $$
 \begin{aligned}
 & \text{ maximize } & f_{ts} \\
 & \text{ subject to } & f_{ij} \le c_{ij}, &\text{ for } (i,j) \in E \\
-& & \sum_{(w,i) \in E}f_{wi} - \sum_{(i,z) \in E} f_{iz} \le 0, &\text{ for } i \in E \\
+& & \sum_{(w,i) \in E}f_{wi} - \sum_{(i,z) \in E} f_{iz} \le 0, &\text{ for } i \in V \\
 & & f_{ij} \ge 0, & \text{ for } (i,j) \in E
 \end{aligned}
 $$
 
-
 ## Min-Max Relations and Duality
+
+
 
 本节介绍 LP 的对偶问题，及其二者之间的关系。
 
-- Vertex Cover
+- Vertex Cover: 顶点没有权重，选取最少的顶点，覆盖所有边。
+- Set Cover: 子集没有权重，选取最少的子集，覆盖所有的元素。
 
+### VC
 
+令 $x_v$ 表示顶点 $v$ 是否被选取。
+$$
+\begin{aligned}
+\text{ min } & \sum_{v \in V} x_v \\
+\text{ s.t. } & x_u + x_v \ge 1 & \forall{(u, v) \in E} \\
+& x_v \in \{0, 1\} & \forall{v \in V}
+\end{aligned}
+$$
+其 Dual LP 为：
+$$
+\begin{aligned}
+\text{ max } & \sum_{e \in E} y_e \\
+\text{ s.t. } & \sum_{e=(u, v) \in E} y_e \le 1 & \forall{v \in V} \\
+& y_e \ge 0 & \forall{e \in E}
+\end{aligned}
+$$
+其中 $y_e$ 表示边 $e$ 是否被选中，第一个约束表示每个顶点 $v$ 最多只能被其关联的边覆盖一次（这是匹配的定义）。
+
+Dual LP 其实就是 Max-Matching 的 LP 形式，这就说明了 VC 和 Max-Matching 是对偶问题。
+
+PS：如果是带权重的 VC 问题，那么把目标函数改为：
+$$
+\text{ min } \sum_{v \in V} w(v) \cdot x_v
+$$
+对应地，需要把 Dual LP 的约束改为 $\sum_{e=(u, v)\in E} y_e \le w(v)$ ，这时候表示的是 Max-Matching 每个顶点最多允许被匹配 $w(v)$ 次。
+
+### SC
+
+令 $x_S$ 表示子集 $S$ 是否选中。
+$$
+\begin{aligned}
+\text{ min } & \sum_{S \in \mathcal{S}} x_S \\
+\text{ s.t. } & \sum_{S:e \in S} x_S \ge 1 & \forall{e \in U} \\
+& x_S \in \{0, 1\} & \forall{S \in \mathcal{S}}
+\end{aligned}
+$$
+Dual LP:
+$$
+\begin{aligned}
+\text{ max } & \sum_{e \in U} y_e \\
+\text{ s.t. } & \sum_{e \in S} y_e \le 1 & \forall{S \in \mathcal{S}} \\
+& y_e \ge 0 & \forall{e \in U}
+\end{aligned}
+$$
+如果是带权重的 SC 问题：
+
+<img src="https://gitee.com/sinkinben/pic-go/raw/master/img/20210610162049.png" style="width:80%;" />
+
+这里，可以把 $c(S)$ 理解为背包 $S$ 的容量（并且背包只允许放入 $S$ 所指定的物品），$y_e$ 理解为物品 $e$ 的体积，Dual LP 表示的是**使得装入背包的物品的体积之和最大**。有点像 Bin Packing 问题。
 
 ## References
 
 - [1] CLRS - Introduction to Algorithm (Section 29.2)
 - [2] WS11 - The Design of Algorithm (Section 7.3)
+- [3] VC Dual: http://pages.cs.wisc.edu/~shuchi/courses/787-F07/scribe-notes/lecture15.pdf
+- [4] SC Dual: http://ac.informatik.uni-freiburg.de/lak_teaching/ws11_12/combopt/notes/set_cover.pdf
