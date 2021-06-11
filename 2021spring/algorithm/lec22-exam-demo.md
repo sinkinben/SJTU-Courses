@@ -5,6 +5,8 @@
 - DP (missing 2016)
 - NP Problem (missing 2016)
 - Network Flow
+- LP
+- Approximation Algorithm
 
 
 
@@ -55,6 +57,10 @@ $$
 $$
 dp[0, j] = (j >= a_0) ? a_0 : 0 \\
 $$
+
+最后返回 `dp[n, t] == t` .
+
+
 
 ### 2019 Longest Palindromic
 
@@ -192,14 +198,16 @@ $$
 
 - 2020 (For undergraduate) - 锦标赛
 
+参考：https://www.cs.princeton.edu/courses/archive/spr03/cs226/assignments/baseball.html
+
 构造一个二分图的最大流问题，即构造 $G = (s,t, L, R)$ .
 
 - 令 $L$ 表示 $m$ 场比赛，$R$ 表示 $n$ 个球队。
 - 对于每个比赛 $l = (i, j) \in L \text{ where } i,j \in R$ ，构造边 $(l, i)$ 和 $(l, j)$，容量均为 1 。
+- 构造边 $s \rightarrow \forall{l \in L}$ ，$l = (i, j)$ ，该边容量是 1 。
+- 构造边 $\forall{r \in R} \rightarrow t$ 。
 
-TBD：我不会了。
-
----
+TBD: 我不会了。
 
 
 
@@ -340,9 +348,11 @@ $$
 
 ### 2019 Equivalent LP
 
-- 2019 - 通过 equivalent 表示 LP
-
-TBD.
+```
+min  t
+s.t. t = |x - y|
+     y = x
+```
 
 
 
@@ -408,6 +418,7 @@ return ans
 
 ```
 Input: p[1,...,n] and integer m
+sort(p[1,...,n]) in descending order
 // 每个机器初始的工作时间都是 0 
 for i=1 to m:
 	q.push(0)
@@ -433,13 +444,59 @@ $$
 
 
 
-### 2017 Metrix TSP
+### 2017 Metric TSP
 
 作业题，参考 Ex5 .
+
+PS: 因为 TSP 也是一个 2-matching ，而 $M$ 已经是最小的 2-matching 了，因此 $OPT_{tsp} \ge M$ .
 
 
 
 ### 2017 Cardinality Vertex Cover
 
+令 $T$ 是 DFS-Tree，$L$ 是 $T$ 的所有叶子结点的集合，$n$ 是顶点总数。
 
+显然 $V-L$ 覆盖了 $G$ 的所有边。下面证明该算法的近似因子为 2 ：
+
+- 该算法输出的解为 $n - L$，我们需要证明 $n-L \le 2OPT$ .
+- 在最优解 $OPT$ 中，显然不包括那些叶子结点。因为叶子结点只能覆盖一边，而叶子的父亲可以同时覆盖 2 边，这种情况下，都是耗费一个顶点，显然选择父亲结点更优。
+- 对于剩下的顶点 $V-L$ 中，每个顶点至少关联 2 个边，要覆盖所有的边，至少需要 $n - L/2$ 个顶点，因此 $OPT \ge n-L/2$ .
+
+
+
+### 2018 Knapsack
+
+作业题，参考 Ex5.
+
+
+
+### 2019 SC-Tight
+
+<img src="https://gitee.com/sinkinben/pic-go/raw/master/img/20210602193438.png" style="width:70%;" />
+
+
+
+### 2019 Hitting Set
+
+参考：https://stanford.edu/~rezab/discrete/Notes/ws4.pdf
+
+令 $x_e$ 表示元素 $e \in A$ 是否被选中。
+
+Primal LP:
+$$
+\begin{aligned}
+\text{ min } & \sum_{e \in A} x_e w_e \\ 
+\text{ s.t. } & \sum_{e \in B_j} x_e \ge 1 & j=1,\dots, m \\
+& x_e \in \{0, 1\} & \forall{e \in A}
+\end{aligned}
+$$
+Relaxed LP:
+$$
+\begin{aligned}
+\text{ min } & \sum_{e \in A} x_e w_e \\ 
+\text{ s.t. } & \sum_{e \in B_j} x_e \ge 1 & j=1,\dots, m \\
+& 0 \le x_e \le 1 & \forall{e \in A}
+\end{aligned}
+$$
+令 $S = \{a_i | x_i \ge 1/b\}$ ，证明 $S$ 是一个有效的 Hitting Set 且 $w(S) \le b \cdot OPT$ 。
 
