@@ -225,7 +225,13 @@ Consider a company that sells $k$ products and has a database containing the pur
 
 ## Airline Scheduling
 
+问题描述：
 
+- 每个航班 (Flight) 由 4 个参数组成，起点、终点、出发时间、到达时间，即 $(origin_i, dest_i, s_i, t_i)$ .
+- 每个航班飞行都需要一组工作人员 (Crews) ，一组工作人员可以无限次飞行（😅万恶的资本主义社会），但显然的是，一组人员无法同时在 2 个航班上。
+- 给定 $n$ 个航班的参数，求完成这些航班需要的最少的工作人员的组数。
+
+这种情况下，可以把问题构造成为一个 Circulation 。
 
 
 

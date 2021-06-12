@@ -38,17 +38,17 @@ $$
 
 来源于 Refs [2] ，基于 Dijkstra 算法的规约。
 
-> Let $\Gamma = \{S \sube V: s \in S, t \notin S\}$ , that is $\Gamma$ is the set of all $s-t$ cuts in the graph. Then we can model the shortest $s-t$ path problem with the following integer problem:
+> Let $\mathcal{S} = \{S \sube V: s \in S, t \notin S\}$ , that is $\mathcal{S}$ is the set of all $s-t$ cuts in the graph. Then we can model the shortest $s-t$ path problem with the following integer problem:
 > $$
 > \begin{aligned}
 > & \text{minimize }     \sum_{e \in E} w_ex_e \\
-> & \sum_{e \in \delta(S)} x_e \ge 1, & \forall{S \in \Gamma} \\
+> & \sum_{e \in \delta(S)} x_e \ge 1, & \forall{S \in \mathcal{S}} \\
 > & x_e \in \{0, 1\}, & \forall{e \in E}
 > \end{aligned}
 > $$
 > where $\delta(S)$ is the set of all edges that have one endpoint in $S$ and the other endpoint not in $S$.
 
-其对偶形式（其中这个花体 $\textbf{S}$ 就是上述的 $\Gamma$）：
+其对偶形式：
 
 <img src="https://gitee.com/sinkinben/pic-go/raw/master/img/20210514155118.png" style="width:67%;" />
 
