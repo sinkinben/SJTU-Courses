@@ -260,12 +260,11 @@ Thereom - The greedy algorithm is an $H_n$ factor approximation algorithm for th
 
 ### Layering
 
-当然 SC 问题也是可以通过 Layering 来近似的，SC-Layering 的近似因子为 $f$ ，但我找了好久，最后在 Refs[1] 找到了 SC-Layering （这是 Ex-5.1）。
+参考 Ex-5.1 。SC 问题也是可以通过 Layering 来近似的，SC-Layering 的近似因子为 $f$ ， $f$ 是某个元素在给定子集中出现的最大次数。
 
-初始的 $S_0$ 应该是 $S_0 = \mathcal{S}$ .
+初始的 $S_0$ 为 $S_0 = \mathcal{S}$ 。
 
 <img src="https://gitee.com/sinkinben/pic-go/raw/master/img/20210607151624.png" style="width:67%;" />
-
 
 
 
