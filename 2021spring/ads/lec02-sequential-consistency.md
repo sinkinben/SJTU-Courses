@@ -99,7 +99,7 @@ Properties:
 
 ## Q&A
 
-1. What are the differences between *consistency* and *coherence* ?
+1. What are the differences between *consistency, consensus* and *coherence* ?
 
 > Single object consistency is called **coherence**, and consistency across multiple objects.
 

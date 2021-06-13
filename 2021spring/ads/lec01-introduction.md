@@ -62,11 +62,50 @@ Switched Multi-processors 架构：
 
 个人理解，这里就是说如何把多台机器进行集群。
 
-- Bus-based
+- Bus-based: LAN
+- Switched: n-port switch, any-to-any communication
 
 
 
-- Switched
+## Misc
+
+- What is distributed system?
+  - A cluster of machines
+  - **No shared memory** (must use the network)
+  - **No shared lock**
+- 几类 OS:
+  - Multi-processors OS: 多核单机上的 OS 
+  - Network OS: 多台计算机、通过 Network 协同工作（但各自的 OS 是独立的）
+  - Distributed OS
+    - 各自 OS 不是独立的，允许跨机器共享各类 OS 资源
+- Middleware
+  - 类似于 Distributed OS，但实现的不是 OS ，而是 User-level Library 
+  - e.g. MapReduce, RPC framework
+- Why build DS?
+  - Scalability
+  - Performance ratio: 不断增加单机性能并不可取
+  - Distributing applications may make sense
+  - Interactive communication & entertainment
+- **Problems**
+  - Designing **distributed software can be difficult**
+  - **Network** is un-stable
+  - **Security**
+  - Reliability
+    - Availability: fraction of time system is usable
+    - Durability: data must not get lost
+  - Performance
+  - Scalability
+- Service Models
+  - Centralized Model
+  - Client-server Model
+  - Peer-to-peer Model
+  - Processor Pool Model
+  - Cloud Computing Model
+    - e.g. IaaS, PaaS, SaaS, FaaS
+
+
+
+
 
 
 
@@ -75,7 +114,8 @@ Switched Multi-processors 架构：
 一些值得研究的点：
 
 - 一致内存访问 (Uniform Memory Access, UMA) 和非一致内存访问 (Non-uniform Memory Access)
-- 
+
+
 
 
 
