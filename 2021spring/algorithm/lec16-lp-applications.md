@@ -208,7 +208,7 @@ $$
 
 ### Bipartite Max-matching
 
-给出二分图 $G = (L,R)$ 的 LP 表示。（添加 $s,t$ 两个顶点，通过 Max-flow 的方法表示。）
+给出二分图 $G = (L,R)$ 最大匹配的 LP 表示。（添加 $s,t$ 两个顶点，通过 Max-flow 的方法表示。）
 
 <img src="https://gitee.com/sinkinben/pic-go/raw/master/img/20210614192836.png" style="width:50%"/>
 
