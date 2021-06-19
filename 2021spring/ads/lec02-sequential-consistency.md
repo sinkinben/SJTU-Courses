@@ -74,14 +74,16 @@ Properties:
 
 <img src="https://gitee.com/sinkinben/pic-go/raw/master/img/20210316153526.png" style="width:80%;" />
 
-上图中的 Reordered 序列就是所谓的「总序列」：
+上图中的 Reordered 序列就是所谓的「总序列」，对于 Sequential Consistency，需要满足 2 点要求：
 
 - 对于每个 Core 的操作序列，它们在 Reordered 中的相对顺序不变。
 - 每个 Core 的执行结果，与 Reordered 的执行结果一致。
 
+Sequential Consistency 属于强一致性，也是一种不可能实现的一致性模型（可参考 Refs [2] 给出的例子）。
 
 
-## Shared Virtual Memory
+
+## Ivy: Shared Virtual Memory
 
 这一概念出自一篇论文：[Memory Coherence in Shared Virtual Memory Systems](https://www.cs.utexas.edu/~dahlin/Classes/GradOS/papers/p321-li.pdf)
 
@@ -94,6 +96,11 @@ Properties:
 > Release Consistency delay changes visible to other processors until certain synchronization access occurs.
 
 该不会锁这种机制就出自这篇论文吧，蒸馏啊 😅 。
+
+Ivy 这个系统的 Contribution:
+
+- Provides a shared-memory system across  a group of workstations
+- Easier to write parallel/distributed programs (compared with using message passing)
 
 
 
